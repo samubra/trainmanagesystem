@@ -41,7 +41,7 @@ return [
             'class' => 'CLogRouter',
             'routes' => [
                 'logFile' => [
-                    'class' => 'CFileLogRoute',
+                  'class'=>'common.extionsions.yii-debug-toolbar.YiiDebugToolbarRoute',
                     'levels' => 'error, warning',
                     'filter' => 'CLogFilter'
                 ],

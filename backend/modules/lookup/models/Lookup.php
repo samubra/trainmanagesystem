@@ -10,7 +10,23 @@ class Lookup extends CActiveRecord
 	 * @var string $type
 	 * @var integer $position
 	 */
-
+	const INDUSTRY='industry';
+	const BUSINESS='business';
+	const OPERATION='operation';
+	const CERTIFICATE='certificate';
+	const CATEGORY='category';
+	const PERSON_CATEGORY='person_category';
+	const COMPANY_STATUS='company_status';
+	const VENTURE_STATUS='venture_status';
+	const PASSPORT_CARD_TYPE='passport_card_type';
+	const OPERATOR_SATATUS='operator_status';
+	const OPERATOR_EDU='operator_edu';
+	const GENDER='gender';
+	const CERTIFICATE_2='certificate_2';
+	const CERTIFICATE_3='certificate_3';
+	const CERTIFICATE_4='certificate_4';
+	const CERTIFICATE_6='certificate_6';
+	const CERTIFICATE_11='certificate_11';
 	private static $_items=array();
 
 	/**
@@ -178,15 +194,23 @@ class Lookup extends CActiveRecord
 	public function getTypeText($name)
 	{
 		$types=array();
-		$types['industry']='行业名称';
-		$types['business']='企业类型';
-		$types['operation']='准操项目';
-		$types['certificate']='证书类别';
-		$types['category']='培训类别';
-		$types['person_category']='人员类别';
-		$types['company_status']='企业状态';
-		$types['venture_status']='微企学员状态';
-		$types['passport_card_type']='证件类型';
+		$types[self::INDUSTRY]='行业名称';
+		$types[self::BUSINESS]='企业类型';
+		$types[self::OPERATION]='准操项目';
+		$types[self::CERTIFICATE]='特种作业证书类别';
+		$types[self::CATEGORY]='培训类别';
+		$types[self::PERSON_CATEGORY]='微企人员类别';
+		$types[self::COMPANY_STATUS]='企业状态';
+		$types[self::VENTURE_STATUS]='微企学员状态';
+		$types[self::PASSPORT_CARD_TYPE]='证件类型';
+		$types[self::OPERATOR_SATATUS]='特种作业学员状态';
+		$types[self::OPERATOR_EDU]='学员文化程度';
+		$types[self::GENDER]='性别';
+		$types[self::CERTIFICATE_2]='电工准操项目';
+		$types[self::CERTIFICATE_3]='焊接准操项目';
+		$types[self::CERTIFICATE_4]='高处准操项目';
+		$types[self::CERTIFICATE_6]='金属非金属矿山安全作业准操项目';
+		$types[self::CERTIFICATE_11]='场架准操项目';
 		return isset($types[$name])?$types[$name]:false;
 	}
 	/**

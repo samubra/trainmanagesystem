@@ -12,8 +12,9 @@
  * @property string $technical_title
  * @property string $post
  * @property integer $company_id
+ * @property integer $opteration_category
  * @property integer $operation_type
- * @property string $firet_create_date
+ * @property string $first_create_date
  * @property string $issuance_data
  * @property integer $status
  * @property string $update_id
@@ -22,7 +23,7 @@
  * @property integer $create_taime
  * @property string $remark
  */
-class OperatorCard extends CActiveRecord
+class OperatorCard extends BaseActiveRecord
 {
 	/**
 	 * @return string the associated database table name
@@ -41,14 +42,14 @@ class OperatorCard extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('mid', 'required'),
-			array('company_id, operation_type, status, update_time, create_id, create_taime', 'numerical', 'integerOnly'=>true),
+			array('company_id, opteration_category, operation_type, status, update_time, create_id, create_taime', 'numerical', 'integerOnly'=>true),
 			array('mid, first_class_id, update_id', 'length', 'max'=>11),
 			array('operator_number', 'length', 'max'=>30),
 			array('health_status, technical_title, post, remark', 'length', 'max'=>200),
-			array('firet_create_date, issuance_data', 'safe'),
+			array('first_create_date, issuance_data', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, mid, operator_number, first_class_id, health_status, technical_title, post, company_id, operation_type, firet_create_date, issuance_data, status, update_id, update_time, create_id, create_taime, remark', 'safe', 'on'=>'search'),
+			array('id, mid, operator_number, first_class_id, health_status, technical_title, post, company_id, opteration_category, operation_type, first_create_date, issuance_data, status, update_id, update_time, create_id, create_taime, remark', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -77,8 +78,9 @@ class OperatorCard extends CActiveRecord
 			'technical_title' => '专业技术职称',
 			'post' => '职位',
 			'company_id' => '单位ID',
-			'operation_type' => '操作类别',
-			'firet_create_date' => '初领证日期',
+			'opteration_category' => '操作证类别',
+			'operation_type' => '准操作项目',
+			'first_create_date' => '初领证日期',
 			'issuance_data' => '发证日期',
 			'status' => '状态',
 			'update_id' => '修改者ID',
@@ -115,8 +117,9 @@ class OperatorCard extends CActiveRecord
 		$criteria->compare('technical_title',$this->technical_title,true);
 		$criteria->compare('post',$this->post,true);
 		$criteria->compare('company_id',$this->company_id);
+		$criteria->compare('opteration_category',$this->opteration_category);
 		$criteria->compare('operation_type',$this->operation_type);
-		$criteria->compare('firet_create_date',$this->firet_create_date,true);
+		$criteria->compare('first_create_date',$this->first_create_date,true);
 		$criteria->compare('issuance_data',$this->issuance_data,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('update_id',$this->update_id,true);
@@ -140,4 +143,5 @@ class OperatorCard extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
 }

@@ -48,7 +48,7 @@ return [
 			        'class' => 'common.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
 			        //'levels' => 'error, warning',
 			        // 'filter' => 'CLogFilter'
-			        'ipFilters'=>array('127.0.0.1','192.168.30.4'),
+			        'ipFilters'=>array('127.0.0.1'),
 		        ],
 	        ]
         ],

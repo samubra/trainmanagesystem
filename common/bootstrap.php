@@ -16,7 +16,7 @@ if (file_exists(ROOT_DIR . '/vendor/autoload.php'))
 # BEFORE loading the framework or it will have no effect on Yii!
 
 # Launching the Yii framework.
-require_once ROOT_DIR . '/vendor/yiisoft/yii/framework/YiiBase.php';
+require_once ROOT_DIR . '/vendor/yiisoft/framework/YiiBase.php';
 # Include our own Yii singleton definition
 require_once ROOT_DIR . '/common/components/Yii.php';
 # Include our own base WebApplication class

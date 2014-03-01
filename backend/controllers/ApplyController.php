@@ -4,7 +4,8 @@ class ApplyController extends BackendController
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+		$data['member']=new OperatorMember();
+		$this->render('index',$data);
 	}
 
 	// Uncomment the following methods and override them if needed

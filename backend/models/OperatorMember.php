@@ -11,7 +11,7 @@
  * @property integer $mphome
  * @property integer $fphone
  * @property string $gender
- * @property string $edu
+ * @property integer $edu
  * @property string $birthday
  * @property string $address
  * @property integer $create_id
@@ -20,8 +20,9 @@
  * @property integer $update_time
  * @property string $remark
  */
-class OperatorMember extends CActiveRecord
+class OperatorMember extends BaseActiveRecord
 {
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -39,12 +40,12 @@ class OperatorMember extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, ctype, cnum', 'required'),
-			array('mphome, fphone, create_id, create_time, update_id, update_time', 'numerical', 'integerOnly'=>true),
+			array('mphome, fphone', 'numerical', 'integerOnly'=>true),
+			array('edu','checkLookupValue','type'=>Lookup::OPERATOR_EDU,'errorText'=>'学员文化程度不存在！'),
 			array('name', 'length', 'max'=>20),
-			array('ctype', 'length', 'max'=>11),
+			array('ctype', 'checkLookupValue', 'type'=>Lookup::PASSPORT_CARD_TYPE,'errorText'=>'身份证件类别不存在！'),
 			array('cnum', 'length', 'max'=>30),
-			array('gender', 'length', 'max'=>1),
-			array('edu', 'length', 'max'=>10),
+			array('gender', 'checkLookupValue', 'type'=>Lookup::GENDER,'errorText'=>'性别不存在！'),
 			array('address', 'length', 'max'=>250),
 			array('remark', 'length', 'max'=>200),
 			array('birthday', 'safe'),
@@ -64,6 +65,7 @@ class OperatorMember extends CActiveRecord
 		return array(
 		);
 	}
+	
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -114,7 +116,7 @@ class OperatorMember extends CActiveRecord
 		$criteria->compare('mphome',$this->mphome);
 		$criteria->compare('fphone',$this->fphone);
 		$criteria->compare('gender',$this->gender,true);
-		$criteria->compare('edu',$this->edu,true);
+		$criteria->compare('edu',$this->edu);
 		$criteria->compare('birthday',$this->birthday,true);
 		$criteria->compare('address',$this->address,true);
 		$criteria->compare('create_id',$this->create_id);
@@ -138,4 +140,5 @@ class OperatorMember extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
 }

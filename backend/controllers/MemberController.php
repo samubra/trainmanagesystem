@@ -7,7 +7,6 @@ class MemberController extends BackendController {
 	 *     
 	 */
 	public $layout = '//layouts/column2';
-	
 	/**
 	 *
 	 * @return array action filters
@@ -41,7 +40,8 @@ class MemberController extends BackendController {
 						'allow',
 						'actions' => [ 
 								'create',
-								'update' 
+								'update' ,
+									'checkNew'
 						],
 						'users' => [ 
 								'@' 
@@ -84,24 +84,46 @@ class MemberController extends BackendController {
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate() {
-		$model = new OperatorMember ();
 		
+		$data['model'] = new OperatorMember ();
+		
+		$data['step']=1;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		
-		if (isset ( $_POST ['OperatorMember'] )) {
-			var_dump($_POST);
-			$model->attributes = $_POST ['OperatorMember'];
-			if ($model->save ())
-				$this->redirect ( array (
-						'view',
-						'id' => $model->id 
-				) );*/
+		if (isset ( $_POST ['OperatorMember'] ) && isset ( $_POST ['step'] )) {
+			if($_POST['step']=='1'){
+				$model=OperatorMember::model()->find('cnum=:num AND ctype=:type',
+						array(
+								':num'=>$_POST ['OperatorMember']['cnum'],
+								':type'=>$_POST ['OperatorMember']['ctype'],
+						)
+					);
+				$data['step']=2;
+			}else{
+				$model=OperatorMember::model()->findByPk($_POST['OperatorMember']['id']);
+			}
+				if($model){
+					$data['model']=$model;
+					$data['model']->attributes = $_POST ['OperatorMember'];
+					$_POST['step']=='1'?Yii::app()->user->setFlash('info', '该学员已存在，请核对信息并修改！'):null;
+				}else {
+					$data['model']->attributes = $_POST ['OperatorMember'];
+					$data['model']->gender=(substr($data['model']->cnum,-2,1)%2)+1;
+				}
+				
+				if (!$data['model']->save ()){
+						Yii::app()->user->setFlash('warning', '新学员保存失败，请确认后再提交！');
+					}elseif($_POST['step']=='2'){
+							Yii::app()->user->setFlash('success', '新学员保存成功！');
+							$this->redirect ( array (
+									'view',
+									'id' => $data['model']->id
+							));
+		}
 		}
 		
-		$this->render ( 'create', array (
-				'model' => $model 
-		) );
+		$this->render ( 'create', $data );
 	}
 	
 	/**
@@ -158,7 +180,7 @@ class MemberController extends BackendController {
 	 * Lists all models.
 	 */
 	public function actionIndex() {
-		var_dump ( Lookup::items ( Lookup::GENDER ) );
+		//var_dump ( Lookup::items ( Lookup::GENDER ) );
 		$dataProvider = new CActiveDataProvider ( 'OperatorMember' );
 		$this->render ( 'index', array (
 				'dataProvider' => $dataProvider 

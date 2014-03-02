@@ -27,6 +27,7 @@ return [
             // `bootstrap` path alias was defined in global init script
             'class' => 'bootstrap.components.Bootstrap'
         ],
+       
         'errorHandler' => array(
             // Installing our own error page.
             'errorAction' => 'site/error'
@@ -48,7 +49,7 @@ return [
 			        'class' => 'common.extensions.yii-debug-toolbar.YiiDebugToolbarRoute',
 			        //'levels' => 'error, warning',
 			        // 'filter' => 'CLogFilter'
-			        'ipFilters'=>array('127.0.0.1'),
+			      //  'ipFilters'=>array('127.0.0.1','localhost'),
 		        ],
 	        ]
         ],

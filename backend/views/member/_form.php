@@ -3,36 +3,28 @@
 /* @var $model OperatorMember */
 /* @var $form CActiveForm */
 ?>
-
-<?php /** @var TbActiveForm $form */
-$form = $this->beginWidget(
-    'bootstrap.widgets.TbActiveForm',
-    array(
-       'id'=>'operator-member-form',
-        'type' => 'horizontal',
-    )
-); ?>
+		<?php echo CHtml::hiddenField('step',$step);?>
+		<?php if(!$model->isNewRecord){
+			echo CHtml::activehiddenField($model,'id');
+		}?>
+		<?php echo $form->dropDownListRow($model,'ctype',Lookup::items ( Lookup::PASSPORT_CARD_TYPE ),array('disabled' => $step==2)); ?>
+		<?php echo $form->textFieldRow($model,'cnum',array('size'=>30,'maxlength'=>30,'disabled' => $step==2)); ?>
+		
+		
+		<?php if ($step==2):?>
+		<?php echo $form->dropDownListRow($model,'gender', Lookup::items ( Lookup::GENDER ),array('disabled'=>true)); ?>
 		<?php echo $form->textFieldRow($model,'name',array('size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->textFieldRow($model,'cnum',array('size'=>30,'maxlength'=>30)); ?>
 		<?php echo $form->textFieldRow($model,'mphome'); ?>
 		<?php echo $form->textFieldRow($model,'fphone'); ?>
-		<?php echo $form->textFieldRow($model,'gender',array('size'=>1,'maxlength'=>1)); ?>
-		<?php echo $form->textFieldRow($model,'edu'); ?>
-		<?php echo $form->textFieldRow($model,'birthday'); ?>
-		<?php echo $form->textFieldRow($model,'address',array('size'=>60,'maxlength'=>250)); ?>
-		<?php echo $form->textFieldRow($model,'remark',array('size'=>60,'maxlength'=>200)); ?>
-	<div class="form-actions">
-        <?php $this->widget(
-            'bootstrap.widgets.TbButton',
+		<?php echo $form->dropDownListRow($model,'edu',Lookup::items(Lookup::OPERATOR_EDU)); ?>
+		<?php echo $form->datepickerRow(
+            $model,
+            'birthday',
             array(
-                'buttonType' => 'submit',
-                'type' => 'primary',
-                'label' => 'Submit'
+                'options' => array('format' => 'yyyy-mm-dd','language'=>'zh-CN'),
             )
         ); ?>
-        <?php $this->widget(
-            'bootstrap.widgets.TbButton',
-            array('buttonType' => 'reset', 'label' => 'Reset')
-        ); ?>
-    </div>
-<?php $this->endWidget(); ?>
+		<?php echo $form->textFieldRow($model,'address',array('size'=>60,'maxlength'=>250)); ?>
+		<?php echo $form->textFieldRow($model,'remark',array('size'=>60,'maxlength'=>200)); ?>
+		<?php endif;?>
+	

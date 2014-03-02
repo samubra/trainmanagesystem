@@ -15,6 +15,10 @@ return [
         'site' => 'FrontendSiteController'
     ],
     'components' => [
+	    'bootstrap' => [
+	    // `bootstrap` path alias was defined in global init script
+	    		'class' => 'bootstrap.components.Bootstrap'
+	    ],
         'errorHandler' => [
             // Installing our own error page.
             'errorAction' => 'site/error'

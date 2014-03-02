@@ -39,10 +39,12 @@ class OperatorMember extends BaseActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, ctype, cnum', 'required'),
-			array('mphome, fphone', 'numerical', 'integerOnly'=>true),
-			array('edu','checkLookupValue','type'=>Lookup::OPERATOR_EDU,'errorText'=>'学员文化程度不存在！'),
+			array('ctype, cnum,name', 'required'),
+				
+			//array('mphome, fphone', 'numerical', 'integerOnly'=>true),
+			//array('edu','checkLookupValue','type'=>Lookup::OPERATOR_EDU,'errorText'=>'学员文化程度不存在！'),
 			array('name', 'length', 'max'=>20),
+			array('mphome, fphone,edu', 'length', 'max'=>11),
 			array('ctype', 'checkLookupValue', 'type'=>Lookup::PASSPORT_CARD_TYPE,'errorText'=>'身份证件类别不存在！'),
 			array('cnum', 'length', 'max'=>30),
 			array('gender', 'checkLookupValue', 'type'=>Lookup::GENDER,'errorText'=>'性别不存在！'),
@@ -63,6 +65,8 @@ class OperatorMember extends BaseActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+				'createUser'=>array(self::BELONGS_TO,'User','create_id'),
+				'updateUser'=>array(self::BELONGS_TO,'User','update_id'),
 		);
 	}
 	

@@ -24,6 +24,12 @@ return [
             'showScriptName' => false,
             'urlSuffix' => '/',
         ],
+        'input' =>[
+        		'class' => 'CmsInput',
+        		'cleanPost' => true,
+        		'cleanGet' => true,
+        		'cleanMethod' => 'stripClean'
+        ],
         'cache' => extension_loaded('apc')
                 ? [
                     'class' => 'CApcCache',
@@ -41,7 +47,7 @@ return [
             'class' => 'CLogRouter',
             'routes' => [
                 'logFile' => [
-                  'class'=>'common.extionsions.yii-debug-toolbar.YiiDebugToolbarRoute',
+                  'class'=>'CFileLogRoute',
                     'levels' => 'error, warning',
                     'filter' => 'CLogFilter'
                 ],

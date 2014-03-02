@@ -4,14 +4,15 @@ class BaseActiveRecord extends CActiveRecord {
 		return array (
 				'CTimestampBehavior' => array (
 						'class' => 'zii.behaviors.CTimestampBehavior',
-						'createAttribute' => 'created_time',
-						'updateAttribute' => 'updated_time',
-						'setUpdateOnCreate' => true 
+						'createAttribute' => 'create_time',
+						'updateAttribute' => 'update_time',
+						'setUpdateOnCreate' => true ,
+						'timestampExpression'=>"new CDbExpression('NOW()')"
 				),
 				'BlameableBehavior' => array (
 						'class' => 'common.extensions.behaviors.BlameableBehavior',
-						'createdByColumn' => 'created_id', // optional
-						'updatedByColumn' => 'modified_id'  // optional
+						'createdByColumn' => 'create_id', // optional
+						'updatedByColumn' => 'update_id'  // optional
 								) 
 		);
 	}

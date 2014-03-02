@@ -36,3 +36,40 @@
     </li>
 </ul>
 
+<?php 
+$user = Yii::app()->getComponent('user');
+$user->setFlash(
+    'success',
+    "<strong>Well done!</strong> You're successful in reading this."
+);
+$user->setFlash(
+    'info',
+    "<strong>Heads up!</strong> I'm a valuable information!."
+);
+$user->setFlash(
+    'warning',
+    "<strong>Warning!</strong> Check yourself, you're not looking too good."
+);
+$user->setFlash(
+    'error',
+    '<strong>Oh snap!</strong> Change something and try submitting again.'
+);
+ 
+// Render them all with single `TbAlert`
+$this->widget('bootstrap.widgets.TbAlert', array(
+    'block' => true,
+    'fade' => true,
+    'closeText' => '&times;', // false equals no close link
+    'events' => array(),
+    'htmlOptions' => array(),
+    'userComponentId' => 'user',
+    'alerts' => array( // configurations per alert type
+        // success, info, warning, error or danger
+        'success' => array('closeText' => '&times;'),
+        'info', // you don't need to specify full config
+        'warning' => array('block' => false, 'closeText' => false),
+        'error' => array('block' => false, 'closeText' => 'AAARGHH!!')
+    ),
+));
+?>
+

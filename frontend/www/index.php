@@ -13,6 +13,7 @@ require __DIR__.'/../../common/bootstrap.php';
 Yii::setPathOfAlias('frontend', ROOT_DIR .'/frontend');
 Yii::setPathOfAlias('www', ROOT_DIR . '/frontend/www');
 
+Yii::setPathOfAlias('bootstrap', ROOT_DIR . '/vendor/clevertech/yiibooster');
 # We use our custom-made WebApplication component as base class for frontend app.
 require_once ROOT_DIR.'/frontend/components/FrontendWebApplication.php';
 
